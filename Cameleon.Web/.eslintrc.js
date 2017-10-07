@@ -22,6 +22,10 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    // basic eslintrc designed to annoy you, but not too much
+    // https://gist.github.com/Swizec/7fb9ed92b4b56584d74de8dfcfd1c7d0
+    'padded-blocks':0,
+    'no-trailing-spaces':0
   }
 }
