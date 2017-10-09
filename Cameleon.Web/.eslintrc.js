@@ -26,6 +26,7 @@ module.exports = {
     // basic eslintrc designed to annoy you, but not too much
     // https://gist.github.com/Swizec/7fb9ed92b4b56584d74de8dfcfd1c7d0
     'padded-blocks':0,
-    'no-trailing-spaces':0
+    'no-trailing-spaces':0,
+    'no-multiple-empty-lines':0
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <span>Vue.js PWA</span>
+      <span>eCameleon</span>
     </header>
     <main>
       <router-view></router-view>
@@ -18,24 +18,21 @@ export default {
 <style>
 body {
   margin: 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+
 }
 
 main {
-  margin: 20px;
+  margin: 10px;
 }
 
 header {
   margin: 0;
   height: 56px;
   padding: 0 16px 0 24px;
-  background-color: #35495E;
+  background-color: #2c3e50;
   color: #ffffff;
 }
 
