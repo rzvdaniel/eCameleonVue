@@ -1,7 +1,6 @@
 <template>
   <div id="hello" class="container-fluid">
 
-
       <div class="row">
 
         <div class="col-md-6">
@@ -46,34 +45,35 @@
 
 <script>
 
-import Vue from 'vue'
-import VeeValidate from 'vee-validate'
+  import Vue from 'vue'
+  import VeeValidate from 'vee-validate'
 
-Vue.use(VeeValidate)
+  Vue.use(VeeValidate)
 
-export default {
-  name: 'hello',
-  data () {
-    return {
-      email: '',
-      name: '',
-      url: '',
-      secret: ''
-    }
-  },
-  methods: {
-    validateBeforeSubmit (e) {
-      this.$validator.validateAll()
-
-      if (!this.errors.any()) {
-        this.submitForm()
+  export default {
+    name: 'hello',
+    data () {
+      return {
+        email: '',
+        name: '',
+        url: '',
+        secret: ''
       }
     },
-    submitForm () {
-      alert('Form submitted')
+    methods: {
+      validateBeforeSubmit (e) {
+        this.$validator.validateAll()
+
+        if (!this.errors.any()) {
+          this.submitForm()
+        }
+      },
+      submitForm () {
+        alert('Form submitted')
+      }
     }
   }
-}
+  
 </script>
 
 <style>
