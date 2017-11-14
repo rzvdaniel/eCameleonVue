@@ -1,28 +1,37 @@
 <template>
-  <div id="apps"> 
-    <component v-bind:is="currentView"></component>
+
+  <div id="home"> 
+    <a href="#/apps/Hello"> 
+      <i class="fa fa-fort-awesome icon"></i>
+    </a>
+    <a href="#/apps/Bye">
+      <i class="fa fa-pied-piper-alt icon"></i>
+    </a>
   </div>
+  
 </template>
 
 <script>
+
+  require('font-awesome/css/font-awesome.css')
+
   export default {
-    name: 'apps',
+    name: 'home',
     data: () => ({
-      currentView: {}
-    }),
-    created: function () {
-
-      const currentPath = this.$router.history.current.path
-      const pathArray = currentPath.split(/[\s/]+/)
-      const app = pathArray[pathArray.length - 1]
-
-      this._data.currentView = resolve => {
-        resolve(require('../apps/' + app + '.vue'))
-      }
-    }
+    })
   }
+
 </script>
 
 <style>
+
+  .icon {
+    color: black;
+    margin-top: 5px;
+    font-size: 180px;
+    text-align: center;
+    line-height: 180px;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+  }
 
 </style>
