@@ -1,4 +1,4 @@
-module.exports = exports = function registerCompanyPlugin (schema, options) {
+module.exports = exports = function registerCustomerPlugin (schema, options) {
     schema.add({
       name : String,
       address : String,

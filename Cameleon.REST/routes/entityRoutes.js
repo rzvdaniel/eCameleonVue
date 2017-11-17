@@ -1,56 +1,56 @@
 var express = require('express');
 var mongooseModel = require('../models/mongooseModel');
 
-var routes = function(userSchema) {
+var routes = function(entitySchema) {
 
     var router = express.Router();
-    var User = mongooseModel.getSystem('User', userSchema, 'userPlugin');
-    
+    var Entity = mongooseModel.getSystem('Entity', entitySchema, 'entityPlugin');
+
     router.route('/')
         .get(function(req, res) {
 
-            User.find(function(err, users) {
-                console.log('Users = ' + users);
+            Entity.find(function(err, entities) {
+                console.log('Entities = ' + entities);
                 if(err)
                     res.status(500).send(err);
                 else
-                    res.json(users);
+                    res.json(entities);
             })
         })
         .post(function(req, res) {
-            var user = new User(req.body);
-            user.save();
-            res.status(201).send(user);
+            var entity = new Entity(req.body);
+            entity.save();
+            res.status(201).send(entity);
         });
 
-    router.use('/:userId', function(req, res, next) {
-        User.findById(req.params.userId, function(err, user) {
+    router.use('/:entityId', function(req, res, next) {
+        Entity.findById(req.params.entityId, function(err, entity) {
             if(err)
                 res.status(500).send(err);
-            else if(user) {
-                req.user = user;
+            else if(entity) {
+                req.entity = entity;
                 next();
             }
             else {
-                res.status(404).send('No user found');
+                res.status(404).send('No entity found');
             }
         });
     });
     
-    router.route('/:userId')
+    router.route('/:entityId')
         .get(function(req, res) {
-            res.json(req.user);
+            res.json(req.entity);
         })
         .put(function(req, res) {
-            req.user.firstName = req.body.firstName;
-            req.user.lastName = req.body.lastName;         
-            req.user.active = req.body.active;
+            req.entity.firstName = req.body.firstName;
+            req.entity.lastName = req.body.lastName;         
+            req.entity.active = req.body.active;
 
-            req.user.save(function(err) {
+            req.entity.save(function(err) {
                 if(err)
                     res.status(500).send(err);
                 else
-                    res.json(req.user);
+                    res.json(req.entity);
             });
         })
         .patch(function(req, res) {
@@ -58,18 +58,18 @@ var routes = function(userSchema) {
                 delete req.body._id;
 
             for(var p in req.body) {
-                req.user[p] = req.body[p];
+                req.entity[p] = req.body[p];
             }
 
-            req.user.save(function(err) {
+            req.entity.save(function(err) {
                 if(err)
                     res.status(500).send(err);
                 else
-                    res.json(req.user);
+                    res.json(req.entity);
             });
         })
         .delete(function(req, res) {
-            req.user.remove(function(err) {
+            req.entity.remove(function(err) {
                 if(err)
                     res.status(500).send(err);
                 else

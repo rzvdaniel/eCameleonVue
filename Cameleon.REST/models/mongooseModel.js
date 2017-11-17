@@ -2,8 +2,8 @@ var mongoose = require('mongoose')
 Schema = mongoose.Schema;
 
 var mongooseModel = {
-    getUserDefined : function(name, schema, plugin) {
-        return this.get(name, schema, plugin, 'user');
+    getCustom : function(name, schema, plugin) {
+        return this.get(name, schema, plugin, 'custom');
     },
     getSystem : function(name, schema, plugin) {
         return this.get(name, schema, plugin, 'system');

@@ -5,6 +5,7 @@ var express = require('express')
 var db = mongoose.connect('mongodb://localhost/eCameleon');
 var templateSchema = require('./schemas/templateSchema');
 var userSchema = require('./schemas/userSchema');
+var entitySchema = require('./schemas/entitySchema');
 var activitySchema = require('./schemas/activitySchema');
 
 var app = express();
@@ -14,10 +15,12 @@ app.use(bodyParser.json());
 
 templateRouter = require('./routes/templateRoutes')(templateSchema);
 userRouter = require('./routes/userRoutes')(userSchema);
+entityRouter = require('./routes/entityRoutes')(entitySchema);
 activityRouter = require('./routes/activityRoutes')(activitySchema);
 
 app.use('/api/templates', templateRouter);
 app.use('/api/users', userRouter);
+app.use('/api/entities', entityRouter);
 app.use('/api/activities', activityRouter);
 
 app.get('/', function(req, res) {

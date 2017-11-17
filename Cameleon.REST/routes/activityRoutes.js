@@ -7,7 +7,7 @@ var routes = function(activitySchema) {
         
     router.route('/')
         .get(function(req, res) {
-            var Activity = mongooseModel.getUserDefined('Activity', activitySchema, req.query.template);
+            var Activity = mongooseModel.getCustom('Activity', activitySchema, req.query.template);
             
             Activity.find(function(err, activities) {
                 if(err)
@@ -17,7 +17,7 @@ var routes = function(activitySchema) {
             })
         })
         .post(function(req, res) {
-            var Activity = mongooseModel.getUserDefined('Activity', activitySchema, req.body.template);
+            var Activity = mongooseModel.getCustom('Activity', activitySchema, req.body.template);
 
             var activity = new Activity(req.body);
             activity.save();
