@@ -3,7 +3,7 @@ var express = require('express')
     bodyParser = require('body-parser');
 
 var db = mongoose.connect('mongodb://localhost/eCameleon');
-var templateSchema = require('./schemas/templateSchema');
+var appSchema = require('./schemas/appSchema');
 var userSchema = require('./schemas/userSchema');
 var entitySchema = require('./schemas/entitySchema');
 var activitySchema = require('./schemas/activitySchema');
@@ -13,15 +13,15 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-templateRouter = require('./routes/templateRoutes')(templateSchema);
+appRouter = require('./routes/appRoutes')(appSchema);
 userRouter = require('./routes/userRoutes')(userSchema);
 entityRouter = require('./routes/entityRoutes')(entitySchema);
 activityRouter = require('./routes/activityRoutes')(activitySchema);
 
-app.use('/api/templates', templateRouter);
-app.use('/api/users', userRouter);
+app.use('/api/apps', appRouter);
 app.use('/api/entities', entityRouter);
 app.use('/api/activities', activityRouter);
+app.use('/api/users', userRouter);
 
 app.get('/', function(req, res) {
     res.send('Welcome!');

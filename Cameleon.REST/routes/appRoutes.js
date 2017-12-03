@@ -1,52 +1,52 @@
 var express = require('express');
 var mongooseModel = require('../models/mongooseModel');
 
-var routes = function(templateSchema) {
+var routes = function(appSchema) {
 
     var router = express.Router();
-    var Template = mongooseModel.get('Template', templateSchema);
+    var App = mongooseModel.get('App', appSchema);
     
     router.route('/')
         .post(function(req, res) {
-            var template = new Template(req.body);
-            template.save();
-            res.status(201).send(template);
+            var app = new App(req.body);
+            app.save();
+            res.status(201).send(app);
         })
         .get(function(req, res) {
-            Template.find(function(err, templates) {
+            App.find(function(err, apps) {
                 if(err)
                     res.status(500).send(err);
                 else
-                    res.json(templates);
+                    res.json(apps);
             })
         });
 
-    router.use('/:templateId', function(req, res, next) {
-        Template.findById(req.params.templateId, function(err, template) {
+    router.use('/:appId', function(req, res, next) {
+        App.findById(req.params.appId, function(err, app) {
             if(err)
                 res.status(500).send(err);
-            else if(template) {
-                req.template = template;
+            else if(app) {
+                req.app = app;
                 next();
             }
             else {
-                res.status(404).send('No template found');
+                res.status(404).send('No app found');
             }
         });
     });
     
-    router.route('/:templateId')
+    router.route('/:appId')
         .get(function(req, res) {
-            res.json(req.template);
+            res.json(req.app);
         })
         .put(function(req, res) {
-            req.template.name = req.body.name;
-            req.template.active = req.body.active; 
-            req.template.save(function(err) {
+            req.app.name = req.body.name;
+            req.app.active = req.body.active; 
+            req.app.save(function(err) {
                 if(err)
                     res.status(500).send(err);
                 else
-                    res.json(req.template);
+                    res.json(req.app);
             });
         })
         .patch(function(req, res) {
@@ -54,18 +54,18 @@ var routes = function(templateSchema) {
                 delete req.body._id;
 
             for(var p in req.body) {
-                req.template[p] = req.body[p];
+                req.app[p] = req.body[p];
             }
 
-            req.template.save(function(err) {
+            req.app.save(function(err) {
                 if(err)
                     res.status(500).send(err);
                 else
-                    res.json(req.template);
+                    res.json(req.app);
             });
         })
         .delete(function(req, res) {
-            req.template.remove(function(err) {
+            req.app.remove(function(err) {
                 if(err)
                     res.status(500).send(err);
                 else
