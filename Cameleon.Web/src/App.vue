@@ -1,22 +1,6 @@
 <template>
   <div id="app">
-    <header class="mdc-toolbar mdc-toolbar--fixed">
-      <div class="mdc-toolbar__row">
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <a href="#" class="material-icons mdc-toolbar__menu-icon">menu</a>
-          <span class="mdc-toolbar__title">eCameleon</span>
-        </section>
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Download" alt="Download">file_download</a>
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Print this page" alt="Print this page">print</a>
-          <a href="#" class="material-icons mdc-toolbar__icon" aria-label="Bookmark this page" alt="Bookmark this page">bookmark</a>
-        </section>
-      </div>
-    </header>
-    <main>
-      <div class="mdc-toolbar-fixed-adjust">
-      </div>
-    </main>
+    
     <main>
       <router-view></router-view>
     </main>
@@ -29,6 +13,12 @@ export default {
   name: 'app'
 }
 </script>
+
+<style lang="scss">
+  @import "./styles/custom-bootstrap.scss";
+  @import "../node_modules/bootstrap/scss/bootstrap.scss";
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+</style>
 
 <style>
 body {
