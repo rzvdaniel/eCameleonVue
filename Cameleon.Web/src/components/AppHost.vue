@@ -17,7 +17,7 @@
       const app = pathArray[pathArray.length - 1]
 
       this._data.currentView = resolve => {
-        resolve(require('../apps/' + app + '.vue'))
+        resolve(require('../apps/' + app + '/' + app + '.vue'))
       }
     }
   }

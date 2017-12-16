@@ -1,0 +1,93 @@
+<template>
+    <div id="hello" class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-md-6">
+            <h1>Add App</h1>
+
+          <form @submit.prevent="validateBeforeSubmit">
+
+            <div class="form-group" :class="{'has-error': errors.has('name') }">
+                <label class="control-label" for="name">Name</label>
+                <input name="name" v-model="name" v-validate="'required|alpha|min:2'" class="form-control" type="text" placeholder="App Name">
+                <p class="text-danger" v-if="errors.has('name')">{{ errors.first('name') }}</p>
+            </div>
+
+            <div class="form-group" :class="{'has-error': errors.has('title') }">
+                <label class="control-label" for="title">Title</label>
+                <input name="title" v-model="title" v-validate="'required|min:2'" class="form-control" type="text" placeholder="App Title">
+                <p class="text-danger" v-if="errors.has('title')">{{ errors.first('title') }}</p>
+            </div>
+
+            <div class="form-group" :class="{'has-error': errors.has('image') }">
+                <label class="control-label" for="image">Image</label>
+                <input name="image" v-model="image" v-validate="'max:50'" class="form-control" type="text" placeholder="App Image">
+                <p class="text-danger" v-if="errors.has('image')">{{ errors.first('image') }}</p>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+
+          </form>
+        </div>
+      
+      </div>
+  </div>
+</template>
+
+<script>
+
+  import Vue from 'vue'
+  import VeeValidate from 'vee-validate'
+
+  Vue.use(VeeValidate)
+
+  export default {
+    name: 'addApp',
+    data () {
+      return {
+        name: '',
+        title: '',
+        image: ''
+      }
+    },
+    methods: {
+      validateBeforeSubmit (e) {
+        this.$validator.validateAll()
+
+        if (!this.errors.any()) {
+          this.submitForm()
+        }
+      },
+      submitForm () {
+        var details = {
+          name: this.name,
+          title: this.title,
+          image: this.image
+        }
+
+        this.$http.post('http://localhost:8000/api/apps', details).then(
+          response => {
+            // get status
+            response.status
+
+            // get status text
+            response.statusText
+
+            // get 'Expires' header
+            response.headers.get('Expires')
+
+            // get body data
+            this.someData = response.body
+          },
+          response => {
+            // error callback
+          })
+      }
+    }
+  }
+  
+</script>
+
+<style>
+</style>

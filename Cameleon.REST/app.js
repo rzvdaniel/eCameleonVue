@@ -1,6 +1,7 @@
 var express = require('express')
     mongoose = require('mongoose')
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser')
+    cors = require('cors');
 
 var db = mongoose.connect('mongodb://localhost/eCameleon');
 var appSchema = require('./schemas/appSchema');
@@ -12,6 +13,7 @@ var app = express();
 var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(cors());
 
 appRouter = require('./routes/appRoutes')(appSchema);
 userRouter = require('./routes/userRoutes')(userSchema);

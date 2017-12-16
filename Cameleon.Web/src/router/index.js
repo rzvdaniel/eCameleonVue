@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueResource from 'vue-resource'
 import Home from '@/components/Home'
 import AppHost from '@/components/AppHost'
 import Apps from '@/components/Apps'
 import Activities from '@/components/Activities'
-import Entities from '@/components/Entities/Entities'
-import EntityAdd from '@/components/Entities/EntityAdd'
+import Entities from '@/components/Entities'
 
 Vue.use(Router)
+Vue.use(VueResource)
 
 export default new Router({
   routes: [
@@ -35,11 +36,6 @@ export default new Router({
       path: '/entities',
       name: 'Entities',
       component: Entities
-    },
-    {
-      path: '/entities/add',
-      name: 'AddEntity',
-      component: EntityAdd
     }
   ]
 })

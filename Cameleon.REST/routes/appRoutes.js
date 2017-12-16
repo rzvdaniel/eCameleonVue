@@ -4,7 +4,7 @@ var mongooseModel = require('../models/mongooseModel');
 var routes = function(appSchema) {
 
     var router = express.Router();
-    var App = mongooseModel.get('App', appSchema);
+    var App = mongooseModel.getSystem('App', appSchema, 'appPlugin');
     
     router.route('/')
         .post(function(req, res) {
@@ -13,6 +13,7 @@ var routes = function(appSchema) {
             res.status(201).send(app);
         })
         .get(function(req, res) {
+            console.log('Apps = ' + res);
             App.find(function(err, apps) {
                 if(err)
                     res.status(500).send(err);
