@@ -39,6 +39,7 @@
 
   import Vue from 'vue'
   import VeeValidate from 'vee-validate'
+  import Website from '@/utils/website'
 
   Vue.use(VeeValidate)
 
@@ -66,7 +67,7 @@
           image: this.image
         }
 
-        this.$http.post('http://localhost:8000/api/apps', details).then(
+        this.$http.post(Website.getUrl('api/apps'), details).then(
           response => {
             // get status
             response.status
@@ -79,9 +80,11 @@
 
             // get body data
             this.someData = response.body
+            
+            this.$router.push('/Apps') 
           },
           response => {
-            // error callback
+            alert('App not created')
           })
       }
     }
