@@ -2,37 +2,59 @@
 
 <div>
 
-  <h1>The List of Apps</h1>
+  <h2>The List of Apps</h2>
 
   <table id="mainTable" class="table table-striped m-b-0">
     <thead>
     <tr>
-        <th>Name</th><th>Cost</th><th>Profit</th><th>Fun</th>
+        <th>Name</th>
+        <th>Active</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody v-for="app in apps" :key="app._id">
     <tr>
-        <td>Car</td><td>100</td><td>200</td><td>0</td>
-    </tr>
-    <tr>
-        <td>Bike</td><td>330</td><td>240</td><td>1</td>
-    </tr>
-    <tr>
-        <td>Plane</td><td>430</td><td>540</td><td>3</td>
-    </tr>
-    <tr>
-        <td>Yacht</td><td>100</td><td>200</td><td>0</td>
-    </tr>
-    <tr>
-        <td>Segway</td><td>330</td><td>240</td><td>1</td>
-    </tr>
+        <td>
+            <!-- <img class="card-img-top" :src="app.imagePath" alt="Card image cap"> -->
+            <a :href="app.path">{{ app.title }}</a>
+        </td>
+        <td>{{ app.active }}</td>
+    </tr>  
     </tbody>
-    <tfoot>
-    <tr>
-        <th><strong>TOTAL</strong></th><th></th><th></th><th></th>
-    </tr>
-    </tfoot>
   </table>
 
 </div>
 </template>
+
+<script>
+
+  import Website from '@/utils/website'
+
+  export default {
+    name: 'apps',
+    data () {
+      return {
+        apps: []
+      }
+    },
+    created: function () {
+      this.getApps()
+    },
+    methods: {
+      getApps () {
+        this.$http.get(Website.getUrl('api/apps'), {}).then(
+          response => {
+            // success callback
+            this.apps = response.body
+            this.apps.forEach(element => {
+              // element.imagePath = require('../apps/hello/images/hello01.png')
+            })
+            
+          },
+          response => {
+            // error callback
+          })   
+      }
+    }
+  }
+
+</script>
