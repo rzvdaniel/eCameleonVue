@@ -1,9 +1,8 @@
 <template>
 
 <div>
-
   <h2>The List of Apps</h2>
-
+  <router-view></router-view>
   <table id="mainTable" class="table table-striped m-b-0">
     <thead>
     <tr>
@@ -15,7 +14,7 @@
     <tr>
         <td>
             <!-- <img class="card-img-top" :src="app.imagePath" alt="Card image cap"> -->
-            <a :href="app.path">{{ app.title }}</a>
+            <a :href="app.url">{{ app.title }}</a>
         </td>
         <td>{{ app.active }}</td>
     </tr>  
@@ -46,6 +45,7 @@
             // success callback
             this.apps = response.body
             this.apps.forEach(element => {
+              element.url = '#/apps/' + element._id
               // element.imagePath = require('../apps/hello/images/hello01.png')
             })
             

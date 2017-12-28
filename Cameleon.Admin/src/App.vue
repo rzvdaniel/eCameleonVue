@@ -26,6 +26,7 @@
     </nav>
 
     <main>
+      <!-- Routes get rendered here -->
       <router-view></router-view>
     </main>
 

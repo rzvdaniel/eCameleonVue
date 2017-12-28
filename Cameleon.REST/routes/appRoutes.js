@@ -13,7 +13,6 @@ var routes = function(appSchema) {
             res.status(201).send(app);
         })
         .get(function(req, res) {
-            console.log('Apps = ' + res);
             App.find(function(err, apps) {
                 if(err)
                     res.status(500).send(err);
@@ -42,7 +41,10 @@ var routes = function(appSchema) {
         })
         .put(function(req, res) {
             req.app.name = req.body.name;
-            req.app.active = req.body.active; 
+            req.app.title = req.body.title;            
+            req.app.active = req.body.active;
+            req.app.image = req.body.image;  
+               
             req.app.save(function(err) {
                 if(err)
                     res.status(500).send(err);
