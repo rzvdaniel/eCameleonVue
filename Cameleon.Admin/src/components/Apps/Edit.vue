@@ -1,11 +1,16 @@
 <template>
-    <div id="hello" class="container-fluid">
+    <div>
 
-      <div class="row">
+      <div>
+        <apps-nav>
+          <span slot="action">Edit</span>
+        </apps-nav>
+      </div>
+
+      <div class="row container-fluid">
 
         <div class="col-md-6">
-            <h1>Edit App</h1>
-
+          
           <form @submit.prevent="validateBeforeSubmit">
 
             <div class="form-group" :class="{'has-error': errors.has('name') }">
@@ -41,6 +46,7 @@
   import VeeValidate from 'vee-validate'
   import Website from '@/utils/website'
 
+  Vue.component('apps-nav', require('@/components/Apps/AppsNav.vue'))
   Vue.use(VeeValidate)
 
   export default {

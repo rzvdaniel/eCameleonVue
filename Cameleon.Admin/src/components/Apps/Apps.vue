@@ -1,7 +1,12 @@
 <template>
 
 <div>
-  <h2>The List of Apps</h2>
+  <div>
+    <main-nav>
+      <span slot="title">Apps</span>
+    </main-nav>
+  </div>
+
   <router-view></router-view>
   <table id="mainTable" class="table table-striped m-b-0">
     <thead>
@@ -27,6 +32,9 @@
 <script>
 
   import Website from '@/utils/website'
+  import Vue from 'vue'
+
+  Vue.component('main-nav', require('@/components/MainNav.vue'))
 
   export default {
     name: 'apps',
