@@ -1,30 +1,39 @@
 <template>
 
 <div>
-  <div>
-    <main-nav>
-      <span slot="title">Apps</span>
-    </main-nav>
-  </div>
+  
+  <main-nav>
+    <span slot="title">Apps</span>
+    <span slot="action">
+      <a href="/#/apps/add" class="btn btn-primary btn-outline-light btn-sm">Add</a>
+    </span>
+  </main-nav> 
 
-  <router-view></router-view>
-  <table id="mainTable" class="table table-striped m-b-0">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Active</th>
-    </tr>
-    </thead>
-    <tbody v-for="app in apps" :key="app._id">
-    <tr>
-        <td>
-            <!-- <img class="card-img-top" :src="app.imagePath" alt="Card image cap"> -->
-            <a :href="app.url">{{ app.title }}</a>
-        </td>
-        <td>{{ app.active }}</td>
-    </tr>  
-    </tbody>
-  </table>
+  <div class="container-fluid">
+
+    <div class="py-2 d-none d-md-block d-lg-block">
+      <a href="/#/apps/add" class="btn btn-primary">Add</a>
+    </div>
+
+    <table id="mainTable" class="table table-striped mb-0">
+      <thead>
+      <tr>
+          <th>Name</th>
+          <th>Active</th>
+      </tr>
+      </thead>
+      <tbody v-for="app in apps" :key="app._id">
+      <tr>
+          <td>
+              <!-- <img class="card-img-top" :src="app.imagePath" alt="Card image cap"> -->
+              <a :href="app.url">{{ app.title }}</a>
+          </td>
+          <td>{{ app.active }}</td>
+      </tr>  
+      </tbody>
+    </table>
+
+  </div>
 
 </div>
 </template>

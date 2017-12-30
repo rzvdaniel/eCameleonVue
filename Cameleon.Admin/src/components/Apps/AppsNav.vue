@@ -1,15 +1,21 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-dark bg-primary">
     <div>
-      <a class="navbar-brand float-left" href="#/apps/">
+      
+      <a class="float-left pt-1 text-white" href="#/apps/">
           <i class="material-icons">keyboard_backspace</i>
       </a>
 
       <div class="float-left">
-        <a class="navbar-brand" href="#">
-          <slot name="action" class="d-sm-block d-md-block d-lg-none d-md-none"></slot>
-        </a>
+        <h4 class="text-white px-2">
+          <slot name="title"></slot>
+        </h4>
       </div>
+
+    </div>
+
+    <div class="float-right px-2 d-lg-none d-md-none">
+        <slot name="action"></slot>
     </div>
 
   </nav>  
@@ -22,8 +28,5 @@
 </script>
 
 <style>
-  .title {
-    padding-left: 10px;
-  }
 </style>
 

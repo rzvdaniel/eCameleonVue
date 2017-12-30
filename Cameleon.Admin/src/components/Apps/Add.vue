@@ -1,12 +1,24 @@
 <template>
-    <div id="hello" class="container-fluid">
+  <div>
+
+    <div>
+      <apps-nav>
+        <span slot="title">Add</span>
+        <span slot="action">
+          <form class="form-inline">
+            <button class="btn btn-outline-light btn-sm" type="submit" form="addAppForm">Submit</button>
+          </form>
+        </span>
+      </apps-nav>
+    </div>
+
+    <div class="container-fluid">
 
       <div class="row">
 
         <div class="col-md-6">
-            <h1>Add App</h1>
 
-          <form @submit.prevent="validateBeforeSubmit">
+          <form id="addAppForm" @submit.prevent="validateBeforeSubmit">
 
             <div class="form-group" :class="{'has-error': errors.has('name') }">
                 <label class="control-label" for="name">Name</label>
@@ -26,12 +38,16 @@
                 <p class="text-danger" v-if="errors.has('image')">{{ errors.first('image') }}</p>
             </div>
 
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary d-none d-md-block d-lg-block" type="submit">Submit</button>
 
           </form>
+
         </div>
-      
-      </div>
+
+      </div>  
+
+    </div>
+
   </div>
 </template>
 

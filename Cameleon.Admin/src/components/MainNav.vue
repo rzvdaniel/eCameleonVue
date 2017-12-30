@@ -6,10 +6,14 @@
       </button>
 
       <div class="float-left d-sm-block d-md-block d-lg-none d-md-none">
-        <a class="navbar-brand title" href="#">
+        <h4 class="text-white px-2 pt-1">
           <slot name="title"></slot>
-        </a>
+        </h4>
       </div>
+    </div>
+
+    <div class="float-right navbar-cell d-lg-none d-md-none">
+      <slot name="action"></slot>
     </div>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -40,8 +44,5 @@
 </script>
 
 <style>
-  .title {
-    padding-left: 10px;
-  }
 </style>
 

@@ -1,17 +1,24 @@
 <template>
+  <div>
+
     <div>
+      <apps-nav>
+        <span slot="title">Edit</span>
+        <span slot="action">
+          <form class="form-inline">
+            <button class="btn btn-outline-light btn-sm" type="submit" form="editAppForm">Done</button>
+          </form>
+        </span>
+      </apps-nav>
+    </div>
 
-      <div>
-        <apps-nav>
-          <span slot="action">Edit</span>
-        </apps-nav>
-      </div>
+    <div class="container-fluid">
 
-      <div class="row container-fluid">
+      <div class="row">
 
         <div class="col-md-6">
           
-          <form @submit.prevent="validateBeforeSubmit">
+          <form id="editAppForm" @submit.prevent="validateBeforeSubmit">
 
             <div class="form-group" :class="{'has-error': errors.has('name') }">
                 <label class="control-label" for="name">Name</label>
@@ -31,12 +38,15 @@
                 <p class="text-danger" v-if="errors.has('image')">{{ errors.first('image') }}</p>
             </div>
 
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary d-none d-md-block d-lg-block" type="submit">Done</button>
 
           </form>
         </div>
       
       </div>
+
+    </div>
+
   </div>
 </template>
 
