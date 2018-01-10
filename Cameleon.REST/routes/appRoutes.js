@@ -17,8 +17,8 @@ var routes = function(appSchema) {
 
                 const errors = validationResult(req)
                 if (!errors.isEmpty()) {
-                    const summary = 'Please check the input data.'
-                    const error = serverError.get(summary, errors.mapped())
+                    const message = 'Please check the input data.'
+                    const error = serverError.get(message, errors.mapped())
                     res.status(500).send(error)
                 }
 
@@ -28,8 +28,8 @@ var routes = function(appSchema) {
                         res.status(201).send(app)
                     })
                     .catch(function (err) {
-                        const summary = 'An error occured when adding the app.'
-                        const error = serverError.get(summary)
+                        const message = 'An error occured when adding the app.'
+                        const error = serverError.get(message)
                         res.status(500).send(error)
                     })
                
