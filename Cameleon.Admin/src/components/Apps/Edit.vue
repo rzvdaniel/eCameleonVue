@@ -82,11 +82,12 @@
     },
     methods: {
       validateBeforeSubmit (e) {
-        this.$validator.validateAll()
-
-        if (!this.errors.any()) {
-          this.submitForm()
-        }
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            this.submitForm()
+            return
+          }
+        })
       },
       submitForm () {
         let url = Website.getUrl('api/apps/' + this.$route.params.id)

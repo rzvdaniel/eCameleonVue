@@ -1,9 +1,22 @@
 var express = require('express')
     mongoose = require('mongoose')
     bodyParser = require('body-parser')
-    cors = require('cors');
+    cors = require('cors')
+    uiError = require('./errors/uiError')
 
-var db = mongoose.connect('mongodb://localhost/eCameleon');
+// Mongoose
+mongoose.Promise = global.Promise
+
+const db = 'mongodb://localhost/eCameleon'
+var promise = mongoose.connect(db, {
+  useMongoClient: true,
+  /* other options */
+})
+
+promise.then(function(db) {
+    /* Use `db`, for instance `db.model()` */
+})
+
 var appSchema = require('./schemas/appSchema');
 var userSchema = require('./schemas/userSchema');
 var entitySchema = require('./schemas/entitySchema');
@@ -24,6 +37,15 @@ app.use('/api/apps', appRouter);
 app.use('/api/entities', entityRouter);
 app.use('/api/activities', activityRouter);
 app.use('/api/users', userRouter);
+
+app.use(function (err, req, res, next) {
+
+    console.log(err)
+
+    const error = 'An error has occured. Please contact the support team.'
+     
+    res.status(500).json(error)     
+})
 
 app.get('/', function(req, res) {
     res.send('Welcome!');

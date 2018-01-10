@@ -20,6 +20,10 @@
 
           <form id="addAppForm" @submit.prevent="validateBeforeSubmit">
 
+            <div class="form-group" :class="{'has-error': errors.has('summary') }">
+                <p class="text-danger" v-if="errors.has('summary')">{{ errors.first('summary') }}</p>
+            </div>
+
             <div class="form-group" :class="{'has-error': errors.has('name') }">
                 <label class="control-label" for="name">Name</label>
                 <input name="name" v-model="name" v-validate="'required|alpha|min:2'" class="form-control" type="text" placeholder="App Name">
@@ -70,11 +74,12 @@
     },
     methods: {
       validateBeforeSubmit (e) {
-        this.$validator.validateAll()
-
-        if (!this.errors.any()) {
-          this.submitForm()
-        }
+        // this.$validator.validateAll().then((result) => {
+        //   if (result) {
+        this.submitForm()
+        //     return
+        //   }
+        // })
       },
       submitForm () {
         var details = {
@@ -95,12 +100,45 @@
             response.headers.get('Expires')
 
             // get body data
-            this.someData = response.body
+            this.data = response.body
             
             this.$router.push('/Apps') 
           },
           response => {
-            alert('App not created')
+            
+            let responseErrors = response.body.uiErrors
+
+            for (const key in responseErrors) {
+              this.errors.add(key, responseErrors[key].msg)
+            }
+
+            // A. Incomming errors structure:
+            // {
+            //     "errors": {
+            //         "name":{"location":"body","param":"name","value":"","msg":"Invalid value"},
+            //         "title":{"location":"body","param":"title","value":"","msg":"Invalid value"}
+            //     }
+            // }
+
+            // B. Client errors structure
+            // {
+            //   "items": [
+            //     {
+            //       "field": "email",
+            //       "msg": "Newsletter Email is not valid",
+            //       "rule": "email",
+            //       "scope": "newsletter",
+            //       "regenerate": null
+            //     },
+            //     {
+            //       "field": "email",
+            //       "msg": "Newsletter Email is required",
+            //       "rule": "required",
+            //       "scope": "newsletter",
+            //       "regenerate": null
+            //     }
+            //   ]
+            // }
           })
       }
     }
