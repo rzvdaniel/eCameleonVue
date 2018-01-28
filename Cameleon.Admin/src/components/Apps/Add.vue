@@ -74,12 +74,12 @@
     },
     methods: {
       validateBeforeSubmit (e) {
-        // this.$validator.validateAll().then((result) => {
-        //   if (result) {
-        this.submitForm()
-        //     return
-        //   }
-        // })
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            this.submitForm()
+            return
+          }
+        })
       },
       submitForm () {
         var details = {
@@ -104,41 +104,8 @@
             
             this.$router.push('/Apps') 
           },
-          response => {
-            
-            let responseErrors = response.body.uiErrors
-
-            for (const key in responseErrors) {
-              this.errors.add(key, responseErrors[key].msg)
-            }
-
-            // A. Incomming errors structure:
-            // {
-            //     "errors": {
-            //         "name":{"location":"body","param":"name","value":"","msg":"Invalid value"},
-            //         "title":{"location":"body","param":"title","value":"","msg":"Invalid value"}
-            //     }
-            // }
-
-            // B. Client errors structure
-            // {
-            //   "items": [
-            //     {
-            //       "field": "email",
-            //       "msg": "Newsletter Email is not valid",
-            //       "rule": "email",
-            //       "scope": "newsletter",
-            //       "regenerate": null
-            //     },
-            //     {
-            //       "field": "email",
-            //       "msg": "Newsletter Email is required",
-            //       "rule": "required",
-            //       "scope": "newsletter",
-            //       "regenerate": null
-            //     }
-            //   ]
-            // }
+          response => {      
+            this.errors.add('summary', 'An error occured when creating the app')
           })
       }
     }
