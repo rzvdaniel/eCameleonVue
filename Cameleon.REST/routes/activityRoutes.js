@@ -1,22 +1,22 @@
 var express = require('express');
-var mongooseModel = require('../models/mongooseModel');
+var activityModel = require('../models/system/activityModel')
 
-var routes = function(activitySchema) {
+var routes = function (activitySchema) {
 
     var router = express.Router();
-        
+
     router.route('/')
-        .get(function(req, res) {
-            var Activity = mongooseModel.getCustom('Activity', activitySchema, req.query.template);
-            
-            Activity.find(function(err, activities) {
-                if(err)
+        .get(function (req, res) {
+            var Activity = activityModel(activitySchema, req.query.template);
+
+            Activity.find(function (err, activities) {
+                if (err)
                     res.status(500).send(err);
                 else
                     res.json(activities);
             })
         })
-        .post(function(req, res) {
+        .post(function (req, res) {
             var Activity = mongooseModel.getCustom('Activity', activitySchema, req.body.template);
 
             var activity = new Activity(req.body);
@@ -24,11 +24,11 @@ var routes = function(activitySchema) {
             res.status(201).send(activity);
         });
 
-    router.use('/:userId', function(req, res, next) {
-        User.findById(req.params.userId, function(err, user) {
-            if(err)
+    router.use('/:userId', function (req, res, next) {
+        User.findById(req.params.userId, function (err, user) {
+            if (err)
                 res.status(500).send(err);
-            else if(user) {
+            else if (user) {
                 req.user = user;
                 next();
             }
@@ -37,7 +37,7 @@ var routes = function(activitySchema) {
             }
         });
     });
-    
+
     return router;
 };
 
