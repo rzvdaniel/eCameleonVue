@@ -1,9 +1,9 @@
 var mongoose = require('mongoose')
-    Schema = mongoose.Schema;
+var Schema = mongoose.Schema
 
 var userSchema = new Schema({
-    firstName : String,
-    lastName : String
-});
+    firstName: String,
+    lastName: String
+})
 
-module.exports = userSchema;
+module.exports = userSchema

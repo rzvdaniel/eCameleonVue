@@ -3,7 +3,7 @@ var appModel = require('../models/system/appModel')
 
 const { check, validationResult } = require('express-validator/check')
 
-var routes = function (appSchema) {
+var routes = function () {
 
     var router = express.Router()
     var App = appModel()
