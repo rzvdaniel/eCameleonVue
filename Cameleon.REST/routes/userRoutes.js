@@ -1,5 +1,5 @@
 var express = require('express');
-var userModel = require('../models/system/userModel')
+var userModel = require('../models/userModel')
 
 var routes = function () {
 

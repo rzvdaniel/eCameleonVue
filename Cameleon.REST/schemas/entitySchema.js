@@ -3,7 +3,8 @@ var Schema = mongoose.Schema
 
 var entitySchema = new Schema({
     name: String,
-    address: String
+    active : Boolean,
+    lastModified : Date
 });
 
 module.exports = entitySchema;

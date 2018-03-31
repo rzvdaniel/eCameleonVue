@@ -1,5 +1,5 @@
 var express = require('express');
-var entityModel = require('../models/system/entityModel')
+var entityModel = require('../models/entityModel')
 
 var routes = function () {
 
@@ -10,7 +10,6 @@ var routes = function () {
         .get(function (req, res) {
 
             Entity.find(function (err, entities) {
-                console.log('Entities = ' + entities);
                 if (err)
                     res.status(500).send(err);
                 else
@@ -42,8 +41,8 @@ var routes = function () {
             res.json(req.entity);
         })
         .put(function (req, res) {
-            req.entity.firstName = req.body.firstName;
-            req.entity.lastName = req.body.lastName;
+            req.entity.name = req.body.name;
+            req.entity.address = req.body.address;            
             req.entity.active = req.body.active;
 
             req.entity.save(function (err) {

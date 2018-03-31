@@ -1,4 +1,4 @@
-module.exports = exports = function appDetailsPlugin(schema, options) {
+module.exports = function appPlugin(schema, options) {
   schema.add({
   })
 

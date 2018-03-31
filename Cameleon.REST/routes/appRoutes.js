@@ -1,5 +1,5 @@
 var express = require('express')
-var appModel = require('../models/system/appModel')
+var appModel = require('../models/appModel')
 
 const { check, validationResult } = require('express-validator/check')
 
