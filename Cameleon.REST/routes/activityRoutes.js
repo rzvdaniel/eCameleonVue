@@ -17,26 +17,12 @@ var routes = function (activitySchema) {
             })
         })
         .post(function (req, res) {
-            var Activity = mongooseModel.getCustom('Activity', activitySchema, req.body.template);
+            var Activity = activityModel(activitySchema, req.query.template);
 
             var activity = new Activity(req.body);
             activity.save();
             res.status(201).send(activity);
         });
-
-    router.use('/:userId', function (req, res, next) {
-        User.findById(req.params.userId, function (err, user) {
-            if (err)
-                res.status(500).send(err);
-            else if (user) {
-                req.user = user;
-                next();
-            }
-            else {
-                res.status(404).send('No user found');
-            }
-        });
-    });
 
     return router;
 };

@@ -1,3 +1,4 @@
+// @ts-nocheck
 var express = require('express');
 var entityModel = require('../models/entityModel')
 
@@ -42,7 +43,7 @@ var routes = function () {
         })
         .put(function (req, res) {
             req.entity.name = req.body.name;
-            req.entity.address = req.body.address;            
+            req.entity.address = req.body.address;
             req.entity.active = req.body.active;
 
             req.entity.save(function (err) {
