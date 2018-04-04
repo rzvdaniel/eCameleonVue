@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator/check')
 var routes = function () {
 
     var router = express.Router()
-    var App = appModel()
+    var AppModel = appModel('App', 'appPlugin', 'appSchema')
 
     const errorMessage = {
         Post: 'An error occured when adding the app',
@@ -28,7 +28,7 @@ var routes = function () {
                     return res.status(400).json({ errors: errors.mapped() })
                 }
 
-                var app = new App(req.body)
+                var app = new AppModel(req.body)
 
                 app.save()
                     .then(function (doc) {
@@ -40,7 +40,7 @@ var routes = function () {
 
             })
         .get(function (req, res) {
-            App.find(function (err, apps) {
+            AppModel.find(function (err, apps) {
                 if (err)
                     res.status(404).send(errorMessage.NotFound)
                 else
@@ -49,7 +49,7 @@ var routes = function () {
         })
 
     router.use('/:appId', function (req, res, next) {
-        App.findById(req.params.appId, function (err, app) {
+        AppModel.findById(req.params.appId, function (err, app) {
             if (err)
                 res.status(500).send(err)
             else if (app) {
@@ -111,6 +111,30 @@ var routes = function () {
                     res.status(204).send('Removed')
             })
         })
+
+    router.route('/:appId/activities')
+        .post([
+            check('name', 'The Name field is required').not().isEmpty(),
+            check('title', 'The Title field is required').not().isEmpty()],
+            function (req, res) {
+
+                const errors = validationResult(req)
+
+                if (!errors.isEmpty()) {
+                    return res.status(400).json({ errors: errors.mapped() })
+                }
+
+                var app = new AppModel(req.body)
+
+                app.save()
+                    .then(function (doc) {
+                        res.status(201).send(app)
+                    })
+                    .catch(function (err) {
+                        res.status(500).send(errorMessage.Post)
+                    })
+
+            })
 
     return router
 }

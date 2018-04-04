@@ -1,12 +1,11 @@
 var mongoose = require('mongoose')
 
-var appModel = function () {
-    var plugin = require('../plugins/appPlugin');
+var appModel = function (appName, pluginName, schemaName) {
+    var plugin = require('../plugins/' + pluginName)
+    var appSchema = require('../schemas/' + schemaName)
+    appSchema.plugin(plugin)
 
-    var appSchema = require('../schemas/appSchema');
-    appSchema.plugin(plugin);
-
-    return mongoose.model('App', appSchema);
+    return mongoose.model(appName, appSchema);
 }
 
 module.exports = appModel

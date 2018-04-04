@@ -20,10 +20,10 @@
                 <p class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</p>
             </div>
 
-            <div class="form-group" :class="{'has-error': errors.has('url') }">
-                <label class="control-label" for="url">Website</label>
-                <input name="url" v-model="url" v-validate="'required|url'" class="form-control" type="text" placeholder="Website">
-                <p class="text-danger" v-if="errors.has('url')">{{ errors.first('url') }}</p>
+            <div class="form-group" :class="{'has-error': errors.has('text') }">
+                <label class="control-label" for="text">Text</label>
+                <input name="text" v-model="text" class="form-control" type="text" placeholder="Text">
+                <p class="text-danger" v-if="errors.has('text')">{{ errors.first('text') }}</p>
             </div>
 
             <button class="btn btn-primary" type="submit">Submit</button>
@@ -56,8 +56,7 @@
       return {
         email: '',
         name: '',
-        url: '',
-        secret: ''
+        text: ''
       }
     },
     methods: {
@@ -69,7 +68,10 @@
         }
       },
       submitForm () {
-        alert('Form submitted')
+        let appName = this.$route.params.name
+        console.log(appName)
+        debugger
+        alert(this._data)
       }
     }
   }
@@ -77,4 +79,5 @@
 </script>
 
 <style>
+
 </style>
