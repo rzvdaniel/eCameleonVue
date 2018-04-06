@@ -25,10 +25,12 @@ app.use(cors());
 var appRouter = require('./routes/appRoutes')()
 var userRouter = require('./routes/userRoutes')()
 var entityRouter = require('./routes/entityRoutes')()
+var activityRouter = require('./routes/activityRoutes')()
 
 app.use('/api/apps', appRouter);
 app.use('/api/entities', entityRouter);
 app.use('/api/users', userRouter);
+app.use('/api/activities', activityRouter);
 
 app.use(function (err, req, res, next) {
   // TODO! Log the server error to the database

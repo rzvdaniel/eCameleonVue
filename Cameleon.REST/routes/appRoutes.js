@@ -112,30 +112,6 @@ var routes = function () {
             })
         })
 
-    router.route('/:appId/activities')
-        .post([
-            check('name', 'The Name field is required').not().isEmpty(),
-            check('title', 'The Title field is required').not().isEmpty()],
-            function (req, res) {
-
-                const errors = validationResult(req)
-
-                if (!errors.isEmpty()) {
-                    return res.status(400).json({ errors: errors.mapped() })
-                }
-
-                var app = new AppModel(req.body)
-
-                app.save()
-                    .then(function (doc) {
-                        res.status(201).send(app)
-                    })
-                    .catch(function (err) {
-                        res.status(500).send(errorMessage.Post)
-                    })
-
-            })
-
     return router
 }
 
