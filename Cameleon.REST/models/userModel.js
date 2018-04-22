@@ -1,8 +1,8 @@
 var mongoose = require('mongoose')
 
 var userModel = function () {
-  var plugin = require('../plugins/userPlugin');
-  var schema = require('../schemas/userSchema');
+  var schema = require('../schemas/userSchema')
+  var plugin = require('../plugins/userPlugin')
 
   schema.plugin(plugin);
 

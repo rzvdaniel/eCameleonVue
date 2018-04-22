@@ -24,10 +24,7 @@ var routes = function (activitySchema) {
           res.json(activities);
       })
     })
-    .post(function (req, res) {
-      console.log(req.params.appName)
-      console.log(req.body)
-      
+    .post(function (req, res) {      
       let ActivityModel = activityModel(req.params.appName)
       let activity = new ActivityModel(req.body)
 
