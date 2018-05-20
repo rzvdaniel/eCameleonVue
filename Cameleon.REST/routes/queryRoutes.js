@@ -27,7 +27,25 @@ var routes = function (activitySchema) {
         })
     })
 
+  router.route('/:appName')
+    .post(function (req, res) {      
+      let ActivityModel = activityModel(req.params.appName)
+      let activity = new ActivityModel(req.body)
+
+      console.log('--------activity--------')
+      console.log(req.body)
+
+      activity.save()
+        .then(function (doc) {
+          res.status(201).send(activity)
+        })
+        .catch(function (err) {
+          res.status(500).send(errorMessage.Post)
+        })
+    })
+
   router.route('/:appName/:query')
+   
     .put(function (req, res) {
         let ActivityModel = activityModel(req.params.appName)
         let queryObject = JSON.parse(req.params.query)

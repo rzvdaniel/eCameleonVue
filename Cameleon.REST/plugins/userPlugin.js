@@ -1,4 +1,4 @@
-module.exports = function userDetailsPlugin(schema, options) {
+module.exports = function userPlugin(schema, options) {
   schema.add({
     fullName: String,
     email: String,
@@ -6,7 +6,8 @@ module.exports = function userDetailsPlugin(schema, options) {
   })
 
   schema.pre('save', function (next) {
-    this.lastModified = new Date
+    this.createdDate = new Date
+    this.updatedDate = new Date
     next()
   })
 }

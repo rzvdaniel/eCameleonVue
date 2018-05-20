@@ -4,7 +4,7 @@ var Schema = mongoose.Schema
 
 var activitySchema = new Schema({
     createdDate: Date,
-    lastModified: Date
+    updatedDate: Date
 })
 
 module.exports = activitySchema
