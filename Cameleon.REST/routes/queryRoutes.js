@@ -32,9 +32,6 @@ var routes = function (querySchema) {
       let QueryModel = queryModel(req.params.appName)
       let activity = new QueryModel(req.body)
 
-      console.log('--------activity--------')
-      console.log(req.body)
-
       activity.save()
         .then(function (doc) {
           res.status(201).send(activity)
