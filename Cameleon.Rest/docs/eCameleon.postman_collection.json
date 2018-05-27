@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Query Get",
+			"name": "Article Get",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -36,7 +36,7 @@
 			"response": []
 		},
 		{
-			"name": "Query Delete",
+			"name": "Article Delete",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -65,7 +65,7 @@
 			"response": []
 		},
 		{
-			"name": "Query Post",
+			"name": "Article Post",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -93,7 +93,36 @@
 			"response": []
 		},
 		{
-			"name": "Query Put",
+			"name": "Article Put",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"$set\": { \"post\" : \"This is an update to my first post. Hello World!\" } }"
+				},
+				"url": {
+					"raw": "{{eCameleon}}/api/queries/post/{\"_id\": \"5afef4ea8876c41fec3a9722\"}",
+					"host": [
+						"{{eCameleon}}"
+					],
+					"path": [
+						"api",
+						"queries",
+						"post",
+						"{\"_id\": \"5afef4ea8876c41fec3a9722\"}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Article Comment Put",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -122,7 +151,7 @@
 			"response": []
 		},
 		{
-			"name": "User Add",
+			"name": "User Post",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -150,7 +179,7 @@
 			"response": []
 		},
 		{
-			"name": "User Update",
+			"name": "User Put",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -161,18 +190,18 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"rzvdaniel@gmail.com\",\n\t\"fullName\": \"Razvan Daniel Predescu\"\n}\n"
+					"raw": "{\n    \"fullName\": \"Razvan Predescu\"\n}"
 				},
 				"url": {
-					"raw": "{{eCameleon}}/api/activities/user/5ad1c02a1150c70e10575886",
+					"raw": "{{eCameleon}}/api/queries/user/{\"_id\": \"5aff00cd4ee7a724d8138851\"}",
 					"host": [
 						"{{eCameleon}}"
 					],
 					"path": [
 						"api",
-						"activities",
+						"queries",
 						"user",
-						"5ad1c02a1150c70e10575886"
+						"{\"_id\": \"5aff00cd4ee7a724d8138851\"}"
 					]
 				}
 			},
@@ -193,15 +222,15 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{eCameleon}}/api/activities/user/5adae6da07b12c279807f546",
+					"raw": "{{eCameleon}}/api/queries/user/{\"_id\":\"5ad61e41e9dd640e8025548b\"}",
 					"host": [
 						"{{eCameleon}}"
 					],
 					"path": [
 						"api",
-						"activities",
+						"queries",
 						"user",
-						"5adae6da07b12c279807f546"
+						"{\"_id\":\"5ad61e41e9dd640e8025548b\"}"
 					]
 				}
 			},
@@ -252,14 +281,16 @@
 					"raw": "{\n\t\"activity\": {\n    \"createdDate\": \"2018-03-23T16:32:27.424Z\",\n    \"name\": \"Razvan predescu\",\n    \"address\": \"65 Parklands Court\",\n    \"city\": \"Dublin\",\n    \"country\": \"Ireland\"\n}\n}"
 				},
 				"url": {
-					"raw": "{{eCameleon}}/api/activities/user",
+					"raw": "{{eCameleon}}/api/queries/user/{}/{}",
 					"host": [
 						"{{eCameleon}}"
 					],
 					"path": [
 						"api",
-						"activities",
-						"user"
+						"queries",
+						"user",
+						"{}",
+						"{}"
 					]
 				}
 			},
