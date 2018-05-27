@@ -1,7 +1,7 @@
 var express = require('express');
-var activityModel = require('../models/activityModel')
+var queryModel = require('../models/queryModel')
 
-var routes = function (activitySchema) {
+var routes = function (querySchema) {
 
   const errorMessage = {
     Get: 'An error occured when retrieving the result',
@@ -15,11 +15,11 @@ var routes = function (activitySchema) {
 
   router.route('/:appName/:query/:projection')
     .get(function (req, res) {
-      let ActivityModel = activityModel(req.params.appName)
+      let QueryModel = queryModel(req.params.appName)
       let queryObject = JSON.parse(req.params.query)
       let projectionObject = JSON.parse(req.params.projection)
 
-      ActivityModel.find(queryObject, projectionObject, (error, item) => {
+      QueryModel.find(queryObject, projectionObject, (error, item) => {
           if (error) {
             console.log(errorMessage.Get);
           }
@@ -29,8 +29,8 @@ var routes = function (activitySchema) {
 
   router.route('/:appName')
     .post(function (req, res) {      
-      let ActivityModel = activityModel(req.params.appName)
-      let activity = new ActivityModel(req.body)
+      let QueryModel = queryModel(req.params.appName)
+      let activity = new QueryModel(req.body)
 
       console.log('--------activity--------')
       console.log(req.body)
@@ -47,11 +47,11 @@ var routes = function (activitySchema) {
   router.route('/:appName/:query')
    
     .put(function (req, res) {
-        let ActivityModel = activityModel(req.params.appName)
+        let QueryModel = queryModel(req.params.appName)
         let queryObject = JSON.parse(req.params.query)
         let projectionObject = req.body
 
-        ActivityModel.update(queryObject, projectionObject, (error, item) => {
+        QueryModel.update(queryObject, projectionObject, (error, item) => {
             if (error) {
               console.log(error);
             }
@@ -59,10 +59,10 @@ var routes = function (activitySchema) {
           })
     })
     .delete(function (req, res) {
-      let ActivityModel = activityModel(req.params.appName)
+      let QueryModel = queryModel(req.params.appName)
       let queryObject = JSON.parse(req.params.query)
 
-      ActivityModel.deleteMany(queryObject, (err) => {
+      QueryModel.deleteMany(queryObject, (err) => {
         if (err)
           res.status(500).send(err);
         else

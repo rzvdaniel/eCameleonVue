@@ -22,14 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-var appRouter = require('./routes/appRoutes')()
-var userRouter = require('./routes/userRoutes')()
-var entityRouter = require('./routes/entityRoutes')()
 var queryRouter = require('./routes/queryRoutes')()
 
-app.use('/api/apps', appRouter);
-app.use('/api/entities', entityRouter);
-app.use('/api/users', userRouter);
 app.use('/api/queries', queryRouter);
 
 app.use(function (err, req, res, next) {

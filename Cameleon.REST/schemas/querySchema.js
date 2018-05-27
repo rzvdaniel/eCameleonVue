@@ -2,9 +2,9 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
-var activitySchema = new Schema({
+var querySchema = new Schema({
     createdDate: Date,
     updatedDate: Date
 })
 
-module.exports = activitySchema
+module.exports = querySchema
