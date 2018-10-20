@@ -2,6 +2,13 @@ import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import WithRender from './nest.html';
 
+// Using vue-template-loader with Vue.js to Compile HTML Templates
+// https://alligator.io/vuejs/vue-template-loader
+
+// Why I use vue-class-component
+// Readable class rather than an odd JS Object
+// https://medium.com/haiiro-io/why-i-use-vue-class-component-472579a266b4
+
 @WithRender
 @Component({})
 export default class NestComponent extends Vue {
