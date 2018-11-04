@@ -6,9 +6,10 @@
 </template>
 
 <script lang="ts">
+
 import { Component, Vue } from 'vue-property-decorator';
-// import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import nest from '@/components/nest.ts'; // @ is an alias to /src
+// @ is an alias to /src
+import nest from '@/components/nest'; 
 
 @Component({
   components: {
@@ -16,4 +17,5 @@ import nest from '@/components/nest.ts'; // @ is an alias to /src
   },
 })
 export default class Home extends Vue {}
+
 </script>

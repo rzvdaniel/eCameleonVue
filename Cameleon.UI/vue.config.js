@@ -1,3 +1,15 @@
+const entryPlus = require('webpack-entry-plus');
+const glob = require('glob');
+
+const entryFiles = [
+  {
+    entryFiles: glob.sync('./src/apps/**/*.ts', './src/apps/**/*.html'),
+    outputName(item) {
+      return item.replace('src/', '');
+    },
+  }
+]
+
 module.exports = {
   configureWebpack: {
     module: {
@@ -8,6 +20,10 @@ module.exports = {
           exclude: /index.html/
         }
       ]
-    }
+    },
+    entry: entryPlus(entryFiles),
+    output: {
+      filename: '[name].js'   
+    },
   }
 }
