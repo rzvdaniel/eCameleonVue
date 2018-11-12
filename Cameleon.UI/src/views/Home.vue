@@ -9,7 +9,7 @@
 
 import { Component, Vue } from 'vue-property-decorator';
 // @ is an alias to /src
-import nest from '@/components/nest'; 
+import nest from '@/components/nest';
 
 @Component({
   components: {

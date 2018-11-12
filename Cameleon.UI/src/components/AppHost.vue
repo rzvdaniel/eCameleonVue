@@ -1,5 +1,5 @@
 <template>
-  <div id="apps"> 
+  <div id="AppHost"> 
     <!-- <keep-alive> -->
       <component :is="currentView"></component>
     <!-- </keep-alive> -->
@@ -8,15 +8,40 @@
 
 <script>
 
+export default {
+  name: 'appHost',
+  data: () => ({
+    currentView: {},
+  }),
+  created() {
+    this.setCurrentApp(this.$route.params.name);
+  },
+  watch: {
+    $route(to, from) {
+      this.setCurrentApp(to.params.name);
+    },
+  },
+  activated() {
+    this.setCurrentApp(this.$route.params.name);
+  },
+  methods: {
+    setCurrentApp(appName) {
+      this._data.currentView = (resolve) => {
+        resolve(require('../apps/' + appName + '/' + appName));
+      };
+    },
+  },
+};
+
 // import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
-// @Component({ components: {}, props: {} })
+// @Component({})
 // export default class AppHost extends Vue {
 //   public currentView = {};
 
 //   public data() {
 //     return {
-//       text: 'This is a test app!',
+//       currentView: {}
 //     };
 //   }
 //   public async setCurrentApp(appName: string) {
@@ -25,7 +50,6 @@
 //   }
 
 //   public navigated() {
-//     alert('navigate');
 //     this.setCurrentApp(this.$route.params.name);
 //   }
 
@@ -37,34 +61,11 @@
 //     this.setCurrentApp(this.$route.params.name);
 //   }
 
+//   @Watch('$route') onRouteChange(to: any, from: any) {
+//     alert('Hello');
+//     this.setCurrentApp(to.params.name);
+//   }
 // }
-
-export default {
-    name: 'appHost',
-    props: ['name'],
-    data: () => ({
-      currentView: {}
-    }),
-    created: function () {
-      this.setCurrentApp(this.$route.params.name)
-    },
-    watch: {
-      '$route' (to, from) {
-        this.setCurrentApp(to.params.name)
-      }
-    },
-    activated () {
-      this.setCurrentApp(this.$route.params.name)
-    },
-    methods: {
-      setCurrentApp: function (appName) {
-        alert('setCurrentApp');
-        this._data.currentView = resolve => {
-          resolve(require('../apps/' + appName + '/' + appName));
-        }
-      }
-    }
-  }
 
 </script>
 

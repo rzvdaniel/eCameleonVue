@@ -2,6 +2,7 @@ var express = require('express')
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 var cors = require('cors')
+var formidable = require('formidable');
 
 // Mongoose
 mongoose.Promise = global.Promise
@@ -23,8 +24,9 @@ app.use(bodyParser.json());
 app.use(cors());
 
 var queryRouter = require('./routes/queryRoutes')()
-
+var uploadRouter = require('./routes/uploadRoutes')()
 app.use('/api/queries', queryRouter);
+app.use('/api/upload', uploadRouter);
 
 app.use(function (err, req, res, next) {
   // TODO! Log the server error to the database

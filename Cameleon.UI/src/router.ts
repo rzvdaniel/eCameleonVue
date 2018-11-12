@@ -23,6 +23,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
+      path: '/apps',
+      name: 'apps',
+      component: () => import(/* webpackChunkName: "apps" */ './views/Apps.vue'),
+    },
+    {
       path: '/app/:name',
       name: 'AppHost',
       component: AppHost,
