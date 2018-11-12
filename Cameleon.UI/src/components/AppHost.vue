@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     setCurrentApp(appName) {
-      this._data.currentView = (resolve) => {
+      this.currentView = (resolve) => {
         resolve(require('../apps/' + appName + '/' + appName));
       };
     },
