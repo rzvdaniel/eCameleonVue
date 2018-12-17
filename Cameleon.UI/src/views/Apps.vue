@@ -13,7 +13,7 @@
     <tr>
         <td>
             <!-- <img class="card-img-top" :src="app.imagePath" alt="Card image cap"> -->
-            <a :href="app.url">{{ app.title }}</a>
+            <router-link :to="app.url">{{ app.title }}</router-link>
         </td>
         <td>{{ app.active }}</td>
     </tr>  
